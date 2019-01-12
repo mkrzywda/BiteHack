@@ -17,6 +17,7 @@ def load_title(file, Movie):
     for k, v in mapping:
         file = file.replace(k, v)
     position = re.search("\d\d\d\d",file).start()
+    print(position)
     date = 0
     if position > 0:
         date = file[position:position + 4]
@@ -26,8 +27,8 @@ def load_title(file, Movie):
     Movie.year = date
     return Movie
 
-#test_movie = movie.Movie()
+test_movie = movie.Movie()
 
-#test_movie = load_title("Shrek (2001) DVDRiP KvCD Hockney(TUS Release).en", test_movie)
+test_movie = load_title("Batman v Superman: Dawn of Justice 2016- Comic-Con Trailer .HD.srt", test_movie)
 
-#print(search_title_in_base(test_movie, '../data/title_data.tsv'))
+print(search_title_in_base(test_movie, '../data/title_data.tsv').ID)
