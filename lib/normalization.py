@@ -7,8 +7,8 @@ def normalize_srt(path):
         results = []
         for record in srt.split("\n\n"):
             lines = record.split("\n")
-            assert re.match("\d+", lines[0])
-            assert re.match("\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}", lines[1])
+            assert re.match(r"\d+", lines[0])
+            assert re.match(r"\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}", lines[1])
             utt = ' '.join(lines[2:])
             results.append(utt)
         return results
