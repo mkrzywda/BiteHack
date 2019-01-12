@@ -1,6 +1,6 @@
 import csv
 import re
-
+from movie import Movie
 
 def search_title_in_base(title, base):
     result = []
