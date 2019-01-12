@@ -8,5 +8,6 @@ string_string = " ".join(string_list)
 
 for word in string_string.split():
     re_word = re.sub(r'[^\w\s]', '', word)
+
     cnt[re_word] += 1
 print(cnt)
