@@ -1,17 +1,18 @@
 import csv
 import re
-from movie import Movie
+import movie
 
-def search_title_in_base(title, base):
-    result = []
+def search_title_in_base(Movie, base):
     with open(base) as titles:
         titles = csv.reader(titles, delimiter='\t')
         for row in titles:
-            if title[0] in row and (row[5] == title[1] or title[1] == '') and row[1] == 'movie':
-                result.append(row[0])
-    return result
+            if Movie.title in row and (row[5] == Movie.year or Movie.year == '') and row[1] == 'movie':
+                Movie.ID = row[0]
+                Movie.genres = row[-1].split(',')
+                return Movie
+    return False
 
-def load_title(file):
+def load_title(file, Movie):
     mapping = [('(',' '), (')',' '), ('_',' '), ('.', ' ')]
     for k, v in mapping:
         file = file.replace(k, v)
@@ -21,8 +22,12 @@ def load_title(file):
         date = file[position:position + 4]
         file = file[:position]
     file = file.rstrip(' ')
-    return [file, date]
+    Movie.title = file
+    Movie.year = date
+    return Movie
 
-test_file = load_title("Shrek (2001) DVDRiP KvCD Hockney(TUS Release).en")
+#test_movie = movie.Movie()
 
-print(search_title_in_base(test_file, 'title_data.tsv'))
+#test_movie = load_title("Shrek (2001) DVDRiP KvCD Hockney(TUS Release).en", test_movie)
+
+#print(search_title_in_base(test_movie, '../data/title_data.tsv'))
