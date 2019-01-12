@@ -9,5 +9,3 @@ def load_vectors(fname):
         tokens = line.rstrip().split(' ')
         data[tokens[0]] = map(float, tokens[1:])
     return data
-
-
