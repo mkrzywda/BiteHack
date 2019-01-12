@@ -3,13 +3,15 @@ import binding_words_vector
 import os, sys
 import word_counter
 
+VECTOR_PATH = os.path.join(os.path.dirname(__file__), '..', 'vector', 'vector.vec')
+
 
 def main(path):
     print(path)
     x = normalization.normalize_srt(path)
     z = word_counter.word_counter(x)
-    print(z)
-    # y = binding_words_vector.load_vectors(x)
+    # print(z)
+    y = binding_words_vector.load_vectors(VECTOR_PATH)
 
 
 if __name__ == '__main__':
