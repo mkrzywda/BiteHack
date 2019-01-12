@@ -1,7 +1,7 @@
 import normalization
 import binding_words_vector
 import os, sys
-import wword_counter
+import word_counter
 
 
 def main(path):
@@ -9,7 +9,7 @@ def main(path):
     x = normalization.normalize_srt(path)
     z = word_counter.word_counter(x)
     print(z)
-    y = binding_words_vector.load_vectors(x)
+    # y = binding_words_vector.load_vectors(x)
 
 
 if __name__ == '__main__':
