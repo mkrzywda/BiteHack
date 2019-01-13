@@ -1,15 +1,16 @@
 from collections import Counter
 import re
 from nltk.stem import PorterStemmer
+import nltk.data
+#nltk.download()
 
+sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
 porter_stemmer = PorterStemmer()
 
 
-def word_counter(s):
-    string_string = " ".join(s).lower()
-    re_word = re.sub(r'[^\w\s]', '', string_string)
-    cnt = Counter(re_word.split())
+def word_counter(subtitles):
+    cnt = Counter(subtitles.split())
     for i in cnt.copy():
-        if porter_stemmer.stem(i) != i:
+        if i[0].islower() and porter_stemmer.stem(i) != i:
             cnt[porter_stemmer.stem(i)] += cnt[i]
     return cnt
