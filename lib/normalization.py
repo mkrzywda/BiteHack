@@ -31,7 +31,7 @@ def normalize_srt(path):
     for t in results:
         t = re.sub(r'[^\w\s]', ' ', t).strip()
         string_string += " " + t[0].lower() + t[1:] if len(t) > 1 else t
-    return string_string.strip()
+    return re.sub(r'\s+', ' ', string_string).strip()
 
 
 if __name__ == '__main__':
