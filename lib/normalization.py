@@ -8,7 +8,6 @@ porter_stemmer = PorterStemmer()
 
 
 def normalize_srt(path):
-    print(path)
     try:
         srt = open(path).read()
     except UnicodeDecodeError:
