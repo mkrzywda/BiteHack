@@ -6,10 +6,9 @@ def search_title_in_base(Movie, base):
     with open(base) as titles:
         titles = csv.reader(titles, delimiter='\t')
         for row in titles:
-            if (('\'' in row[2]) or (':' in row[2])) and (('\'' not in Movie.title )or(':' not in Movie.title)):
-                mapping = [(':', ''), ('\'', '')]
-                for k, v in mapping:
-                    row[2] = row[2].replace(k, v)
+            mapping = [(':', ''), ('\'', '')]
+            for k, v in mapping:
+                row[2] = row[2].replace(k, v)
             if Movie.title in row[2] and (row[5] == Movie.year or Movie.year == '') and row[1] == 'movie':
                 Movie.ID = row[0]
                 Movie.linkIMDB = 'www.imdb.com/title/'+row[0]+'/'
@@ -20,7 +19,7 @@ def search_title_in_base(Movie, base):
 
 def load_title(file, Movie):
     Movie.filename = file
-    mapping = [('(',' '), (')',' '), ('_',' '), ('.', ' ')]
+    mapping = [('(',' '), (')',' '), ('_',' '), ('.', ' '),(':', ''), ('\'', '')]
     for k, v in mapping:
         file = file.replace(k, v)
     position = re.search("\d\d\d\d",file).start()
