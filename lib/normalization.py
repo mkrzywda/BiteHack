@@ -9,14 +9,21 @@ porter_stemmer = PorterStemmer()
 
 def normalize_srt(path):
     try:
-        srt = open(path).read()
+        srt = open(path, newline="").read()
     except UnicodeDecodeError:
-        srt = open(path, encoding='ISO-8859-1').read()
+        srt = open(path, newline="", encoding='ISO-8859-1').read()
     results = []
-    for record in srt.split("\n\n"):
+    #print('>>> ', srt.count("\r\n"))
+    srt = srt.replace("\r\n", "\n")
+    #print('>>> ', srt.count("\t"))
+    #print(srt[-100:])
+    for record in re.split("\n{2,}", srt):
         lines = record.split("\n")
+        if len(lines) < 3:
+            continue
+        #print(lines)
         # assert re.match(r"\d+", lines[0].strip()), f"|{lines[0]}|"
-        assert re.match(r"\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}", lines[1])
+        assert re.match(r"\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}", lines[1]), lines[1]
         utt = re.sub('<([^>]+)>(.*)</\1>', '\1', " ".join(lines[2:]))
         results.extend(sent_detector.tokenize(utt.strip()))
 

@@ -8,7 +8,9 @@ import pprint
 def load_data():
     data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
     for path in glob.glob(os.path.join(data_dir, '*.srt')):
+        print(path)
         text = normalize_srt(path)
+        print(text)
         yield {
             "title": path,
             "text":" ". join(text),
