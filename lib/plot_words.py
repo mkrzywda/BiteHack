@@ -7,21 +7,28 @@ import gensim.downloader as api
 from sklearn.manifold import TSNE
 import normalization
 import word_counter
+from collections import Counter
 
 
-def cluster_analysis(paths, topn=50):
-    model = api.load("glove-twitter-50")
+def cluster_analysis(paths, topn=100):
+    model = api.load("glove-wiki-gigaword-200")#"glove-twitter-50")
     data = []
     vector, labels, names = [], [], []
-    
+    cnt = Counter()
+    wwords = []
+
     for path in paths:
         print('Analyzing: ', path)
         x = normalization.normalize_srt(path)
-        words = [i for i, _ in word_counter.word_counter(x).most_common(50)]
-        print(words)
+        wwords.append([i for i, _ in word_counter.word_counter(x).most_common(topn)])
+        cnt.update(wwords[-1])
+        #print(words)
 
+    for path, words in zip(paths, wwords):
         for word in words:
             try:
+                if cnt[word] > 1:
+                    continue
                 vector.append(model.wv[word])
                 labels.append(word)
                 names.append(path)
