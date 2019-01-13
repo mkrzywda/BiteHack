@@ -3,6 +3,7 @@ from nltk.stem import PorterStemmer
 import nltk.data
 from nltk.corpus import stopwords
 import nltk
+import list_200
 #nltk.download('punkt')
 
 sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
@@ -11,7 +12,6 @@ STOPWORDS = set(stopwords.words('english'))
 STOPWORDS.add('I')
 for i in set(stopwords.words('english')):
     STOPWORDS.add(porter_stemmer.stem(i))
-
 
 def word_counter(subtitles):
     cnt = Counter(subtitles.split())
