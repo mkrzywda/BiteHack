@@ -36,12 +36,13 @@ def add_to_file(movie):
 def movie_exist(movie_title):
     if os.path.isfile("../data/movies.json") is False:
         print("File does not exist")
+        return False
     else:
         with open('../data/movies.json', 'r') as infile:
             movies_dict = json.load(infile)
             if movie_title in movies_dict:
                 return True
-    return False
+        return False
 
 
 
@@ -50,8 +51,8 @@ def create_json_file():
         if file.endswith('.srt'):
             movie = Movie()
             movie = identify_title.load_title(file, movie)
-            if movie_exist(movie.title) == False:
-                print("Movie already exist in .json file")
+            if movie_exist(movie.title+'_'+movie.year) == True:
+                print("Movie "+movie.title+" already exist in .json file")
                 continue
             movie = identify_title.search_title_in_base(movie, '../data/title_data.tsv')
             if movie == False:
