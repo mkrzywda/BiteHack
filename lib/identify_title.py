@@ -13,11 +13,12 @@ def search_title_in_base(Movie, base):
     return False
 
 def load_title(file, Movie):
+    Movie.filename = file
     mapping = [('(',' '), (')',' '), ('_',' '), ('.', ' ')]
     for k, v in mapping:
         file = file.replace(k, v)
     position = re.search("\d\d\d\d",file).start()
-    print(position)
+    #print(position)
     date = 0
     if position > 0:
         date = file[position:position + 4]
@@ -27,8 +28,8 @@ def load_title(file, Movie):
     Movie.year = date
     return Movie
 
-test_movie = movie.Movie()
+#test_movie = movie.Movie()
 
-test_movie = load_title("Batman v Superman: Dawn of Justice 2016- Comic-Con Trailer .HD.srt", test_movie)
+#test_movie = load_title("The.Avengers.2012.DVDRip.X264.AC3-NYDIC.srt", test_movie)
 
-print(search_title_in_base(test_movie, '../data/title_data.tsv').ID)
+#print(search_title_in_base(test_movie, '../data/title_data.tsv').ID)

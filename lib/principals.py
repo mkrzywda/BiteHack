@@ -38,9 +38,12 @@ def set_principals_name(principalIDs, base, Movie):
             if counter == quantity_of_principals: return Movie
     return Movie
 
-test_movie = movie.Movie()
-test_movie.ID = 'tt3315342'
-test_principal_list = get_principals( test_movie, '../data/principals_data.tsv')
+#test_movie = movie.Movie()
+#test_movie.ID = 'tt0848228'
+#test_movie.title = 'The Avengers'
+#test_movie.year = 2012
+#test_principal_list = get_principals( test_movie, '../data/principals_data.tsv')
 
 
-print(set_principals_name(test_principal_list, '../data/basic_personal_data.tsv', test_movie).actors)
+#super_duper_movie = set_principals_name(test_principal_list, '../data/basic_personal_data.tsv', test_movie)
+#movie.add_to_file(super_duper_movie)
