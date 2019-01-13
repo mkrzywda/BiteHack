@@ -15,7 +15,7 @@ def main(path):
         most_z = [word for word, _ in z.most_common(most_no)]
     else:
         most_z = list(z.keys())
-    y = binding_words_vector.load_vectors(VECTOR_PATH)
+    # y = binding_words_vector.load_vectors(VECTOR_PATH)
     cluster = plot_words.cluster_analysis(most_z)
 
 if __name__ == '__main__':
