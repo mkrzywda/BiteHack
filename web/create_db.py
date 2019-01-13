@@ -1,20 +1,33 @@
-import os, glob
+import os, glob, json
 from datetime import datetime
 from elasticsearch import Elasticsearch
 from lib.normalization import normalize_srt
 import json
 import pprint
 
+DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
+
 def load_data():
-    data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
-    for path in glob.glob(os.path.join(data_dir, '*.srt')):
+    for path in glob.glob(os.path.join(DATA_DIR, '*.srt')):
         text = normalize_srt(path)
         yield {
             "title": path,
-            "text":" ". join(text),
+            "text": " ". join(text),
             "timestamp": datetime.now()
         }
 
+
+def load_json():
+    movies = json.load(open(os.path.join(DATA_DIR, 'movies.json')))
+    for key, values in movies.items():
+        path = os.path.join(DATA_DIR, values['filename'])
+        assert os.path.exists(path)
+
+        text = normalize_srt(path)
+
+
+# load_json()
+# exit(1)
 es = Elasticsearch()
 es.indices.delete(index='movies', ignore=[400, 404])
 es.indices.create(index='movies', ignore=400)
