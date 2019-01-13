@@ -12,6 +12,7 @@ def search_title_in_base(Movie, base):
                     row[2] = row[2].replace(k, v)
             if Movie.title in row[2] and (row[5] == Movie.year or Movie.year == '') and row[1] == 'movie':
                 Movie.ID = row[0]
+                Movie.linkIMDB = 'www.imdb.com/title/'+row[0]+'/'
                 Movie.genres = list(row[-1].split(','))
                 print(Movie.title)
                 return Movie

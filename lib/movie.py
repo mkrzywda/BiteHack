@@ -13,6 +13,7 @@ class Movie():
         self.scenario = list()
         self.direction = list()
         self.filename = ''
+        self.linkIMDB = ''
     def __repr__(self):
         return("ID: {0}, Title {1}, Year {2}, Actors: {3}, Keywords: {4}, Genres: {5}, Quotes: {6}, Scenario: {7},\
          Direction: {8}".format(self.ID,self.title,self.year,self.actors,self.keywords,self.genres,self.quotes,\
