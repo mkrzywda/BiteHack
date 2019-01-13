@@ -11,8 +11,19 @@
   <style type="text/css">
     body{
       /* background: url(https://spacy.io/assets/img/pattern_blue.jpg) repeat-x; */
+      /* zoom: 0.1; */
+      transform: scale(0.8);
     }
-    i {
+    @media only screen and (max-width: 1400px) {
+      body {
+        /* background-color: lightblue; */
+        transform: scale(0.6);
+        transform-origin: 50% 0;
+        /* zoom:0.6 !important; */
+      }
+    }
+
+    i.verybig {
       font-size: 400px;
       position: absolute;
       /* color: red; */
@@ -20,7 +31,7 @@
       z-index:2;
     }
 
-    b {
+    i.large {
       font-size: 480px;
       color:black;
       opacity: 0.4;
@@ -33,6 +44,15 @@
       -webkit-animation: fadeInFromNone 0.75s ease-out;
       animation: fadeInFromNone 0.75s ease-out;
       animation-iteration-count: infinite;
+    }
+    i.normal {
+      font-size: 180px;
+      float:left;
+      margin-right: 20px;
+    }
+
+    div.query {
+      font-size: 32px;
     }
 
     h1 {
@@ -83,10 +103,28 @@
       }
   }
 
-  button {
-    font-size: 200px !important;
-  }
+    .query {
+      margin:20px 0;
+      padding-left: 30px;
+    }
+    .query i {
+      padding-right: 20px;
+    }
+
+    hr.clear {
+      clear:both;
+    }
+
+    p.help {
+      float: right;
+      font-size: 30px;
+      color: #999;
+      /* line-height: 50px; */
+      padding: 20px 0;
+    }
   </style>
+
+
 </head>
 
 <script>
@@ -100,28 +138,70 @@ function keypress(event) {  //
 
 <body>
   <form id="formularz" action="">
-    <i class="fas fa-video"></i>
-    <b class="fas fa-caret-left"></b>
+    <i class="fas fa-video verybig"></i>
+    <i class="fas fa-caret-left large"></i>
     <h1>Déjà vu</h1>
-    <textarea placeholder="What do you remember?" name="query" onkeypress="javascript:keypress(event)"></textarea>
-    <h2>query: {{ query }}</h2>
-    <p>
+    <textarea placeholder="What do you remember?" name="query" onkeypress="javascript:keypress(event)" autofocus>{{query}}</textarea>
+    <p class="help">Help: For searching quotes use quotation marks ;)</p>
+
+    <div class="query">
+      {% if query %}
+        <i class="fas fa-chevron-right"></i>Your query: {{ query }}
+      {% endif %}
+    </div>
+
     {% if results %}
       {% for result in results %}
-        <h3>{{ result.0 }} - {{ result.1 }}</h3>
+      <table style="border:1px solid black" class="table table-bordered">
+        <tr>
+          <td colspan="2" >
+            <div style="min-width:200px; height:200px; position:relative;">
+              <i class="fas fa-film normal" style="position:absolute;left:50%;top:50%;font-size:{{result.size}}px; transform: translate(-50%,-50%)"></i>
+            </div>
+          </td>
+          <td rowspan="3" style="width: 100%">
+            <h2 style="float:right; font-size:3em;color:#999;padding: 5px">{{result.year}}</h2>
+            <h2>{{result.title}}</h2>
+            <h3>Genres: {{result.genres|join:", "}}</h3>
+            <h3 style="font-size:1.2em">Direction:
+              {% for director in result.direction %}
+                <span><i class="fas fa-user" style="color: gold" title="Director"></i> {{ director }}
+              {% endfor %}
+            </h3><h3 style="font-size:1.2em">
+              Scenario:
+              {% for scenarist in result.scenario %}
+                <span><i class="fas fa-user" style="color: lightblue" title="Scenarist"></i> {{ scenarist }}
+              {% endfor %}
+            </h3><h3 style="font-size:1.2em">
+              Actors:
+              {% for actor in result.actors %}
+                <span><i class="fas fa-user" style="color: grey" title="Actor"></i> {{ actor }}
+              {% endfor %}
+            </h3>
+            <p>Keywords: {{result.keywords|join:", "}}
+          </td>
+        </tr>
+        <tr style="text-align:center">
+          <td style="font-size:1.2em"><i class="fas fa-star-half-alt"></i> {{ result.score }}</td>
+          <td style="font-size:1.2em"><i class="far fa-angry"></i> {{result.swearscore }}%</td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align:center">
+            <a href="https://{{result.linkIMDB}}" style="font-size:1.5em">Open in IMDb</a>
+          </table>
       {% endfor %}
 
-    {% endif %}
-  </p>
-    <div style="margin-top:60px; display: none">
-
-        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h2>
-        <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut</p>
-
-        <h2> aliquip ex ea commodo consequat. Duis aute irure</h2>
-        <p>dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    {% else %}
+    <div style="text-align:center;font-family: 'Coiny', cursive;color:#888;padding:60px 0">
+      <i class="far fa-frown" style="font-size:300px"></i>
+      <h3 style="padding:60px; font-size: 2.5em">Sorry, we didn't find anything</h3>
     </div>
+    {% endif %}
   </form>
-
+  <!--<hr style="margin: 40px 0;"/>
+  <h3 style="font-size: 6em;font-family: 'Coiny', cursive;color:#ccc">About Project</h3>-->
 </body>
 </html>
+
+<!-- wiadomość gdy nie ma rekordów -->
+<!-- stopwordsy -->
