@@ -15,5 +15,4 @@ res = es.search(index="movies", body={"query": {
     }})
 
 print("Got %d Hits:" % res['hits']['total'])
-for hit in res['hits']['hits']:
-    print("%(timestamp)s %(author)s: %(text)s" % hit["_source"])
+print("Hits %s" % res)
