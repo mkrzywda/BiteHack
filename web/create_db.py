@@ -1,4 +1,4 @@
-import os, glob, json
+import os, glob
 from datetime import datetime
 from elasticsearch import Elasticsearch
 from lib.normalization import normalize_srt
@@ -12,7 +12,7 @@ def load_data():
         text = normalize_srt(path)
         yield {
             "title": path,
-            "text": " ". join(text),
+            "text":" ". join(text),
             "timestamp": datetime.now()
         }
 
@@ -27,7 +27,7 @@ def load_json():
 
 
 # load_json()
-# exit(1)
+
 es = Elasticsearch()
 es.indices.delete(index='movies', ignore=[400, 404])
 es.indices.create(index='movies', ignore=400)
