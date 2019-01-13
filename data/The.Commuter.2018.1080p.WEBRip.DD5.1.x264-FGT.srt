@@ -1,7 +1,7 @@
 1
 00:00:06,000 --> 00:00:12,074
-Advertise your product or brand here
-contact www.OpenSubtitles.org today
+Play one of the best new FPS shooters,
+search Steam for PROJECT WARLOCK
 
 2
 00:00:41,896 --> 00:00:44,462
@@ -6580,4 +6580,4 @@ Subrip: Pix
 1432
 01:38:30,305 --> 01:38:36,720
 Support us and become VIP member 
-to remove all ads from www.OpenSubtitles.org
+to remove all ads from OpenSubtitles.org
