@@ -1,9 +1,6 @@
 import plotly.plotly
 import plotly.graph_objs as go
 import numpy as np
-import pandas as pd
-from gensim.test.utils import common_texts, get_tmpfile
-from gensim.models import Word2Vec
 import gensim.downloader as api
 from sklearn.manifold import TSNE
 
