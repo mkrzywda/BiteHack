@@ -2,16 +2,20 @@ import os, re
 
 
 def normalize_srt(path):
-    with open(path) as file:
-        srt = file.read()
-        results = []
-        for record in srt.split("\n\n"):
-            lines = record.split("\n")
-            assert re.match(r"\d+", lines[0])
-            assert re.match(r"\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}", lines[1])
-            utt = ' '.join(lines[2:])
-            results.append(utt)
-        return results
+    print(path)
+    try:
+        srt = open(path).read()
+    except UnicodeDecodeError:
+        srt = open(path, encoding='ISO-8859-1').read()
+
+    results = []
+    for record in srt.split("\n\n"):
+        lines = record.split("\n")
+        # assert re.match(r"\d+", lines[0].strip()), f"|{lines[0]}|"
+        # assert re.match(r"\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}", lines[1])
+        utt = ' '.join(lines[2:])
+        results.append(utt)
+    return results
 
 
 if __name__ == '__main__':
