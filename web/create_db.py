@@ -11,7 +11,7 @@ def load_data():
         text = normalize_srt(path)
         yield {
             "title": path,
-            "text": text,
+            "text":" ". join(text),
             "timestamp": datetime.now()
         }
 

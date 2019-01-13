@@ -10,7 +10,7 @@ def main(path):
     print(path)
     x = normalization.normalize_srt(path)
     z = word_counter.word_counter(x)
-    # print(z)
+    most_z = [word for word, _ in z.most_common(50)]
     y = binding_words_vector.load_vectors(VECTOR_PATH)
 
 
