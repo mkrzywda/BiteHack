@@ -8,7 +8,6 @@ VECTOR_PATH = os.path.join(os.path.dirname(__file__), '..', 'vector', 'vector.ve
 
 
 def main(path):
-    print(path)
     x = normalization.normalize_srt(path)
     z = word_counter.word_counter(x)
     most_no = 50
