@@ -149,6 +149,7 @@ function keypress(event) {  //
         <i class="fas fa-chevron-right"></i>Your query: {{ query }}
       {% endif %}
     </div>
+    <div style="clear:both"></div>
 
     {% if results %}
       {% for result in results %}
@@ -191,7 +192,7 @@ function keypress(event) {  //
           </table>
       {% endfor %}
 
-    {% else %}
+    {% elif query %}
     <div style="text-align:center;font-family: 'Coiny', cursive;color:#888;padding:60px 0">
       <i class="far fa-frown" style="font-size:300px"></i>
       <h3 style="padding:60px; font-size: 2.5em">Sorry, we didn't find anything</h3>
